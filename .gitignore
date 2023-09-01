@@ -1,0 +1,29 @@
+# Xcode
+.DS_Store
+xcuserdata/
+*.xcuserstate
+
+# Swift
+.swiftpm
+.build/
+
+# CocoaPods
+/Pods
+/Podfile.lock
+
+# Carthage
+/Carthage
+
+# Sensitive data
+/Secrets.swift
+
+# User-specific scheme settings
+*.xcscheme
+!*.xcscheme shared
+
+# Swift Package Manager
+.build/
+Package.pins
+Package.resolved
+*.xcodeproj
+*.playground
