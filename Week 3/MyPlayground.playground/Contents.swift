@@ -13,7 +13,7 @@ for numbers in nums {
 // Iterate over sentence counting the vowels (a, e, i, o, u), ignoring the case.
 
 let sentence = "The qUIck bRown fOx jumpEd over the lAzy doG"
-var vowelsCount = [
+var vowelsCount: [Character: Int] = [
   "a": 0,
   "e": 0,
   "i": 0,
@@ -22,10 +22,8 @@ var vowelsCount = [
 ]
 
 for char in sentence.lowercased() {
-  let charString = String(char)
-
-  if vowelsCount.keys.contains(charString) {
-    vowelsCount[charString]! += 1
+  if vowelsCount.keys.contains(char) {
+    vowelsCount[char]! += 1
   }
 }
 
@@ -143,4 +141,3 @@ var rectangle1 = Rectangle(length: 4, width: 4)
 var rectangle2 = rectangle1
 rectangle2.length = 5
 print("Area: rectangle1 - \(rectangle1.area()) rectangle2 - \(rectangle2.area())")
-
