@@ -108,10 +108,7 @@ class Student {
 let student = Student(person: person, grades: [94, 99, 81, 100, 79])
 student.details()
 
-
-
-
-//Above and Beyond
+// Above and Beyond
 
 struct Square {
   var side: Int
@@ -127,6 +124,7 @@ class Rectangle {
     self.length = length
     self.width = width
   }
+
   func area() -> Int {
     return length * width
   }
@@ -141,3 +139,11 @@ var rectangle1 = Rectangle(length: 4, width: 4)
 var rectangle2 = rectangle1
 rectangle2.length = 5
 print("Area: rectangle1 - \(rectangle1.area()) rectangle2 - \(rectangle2.area())")
+
+let saiyans = ["goku": 1000, "vegetta": 1200, "broly": 300]
+
+saiyans.filter {
+  $0.value > 999
+}.map {
+  $0.key
+}
