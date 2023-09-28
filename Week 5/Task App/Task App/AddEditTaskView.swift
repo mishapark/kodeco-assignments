@@ -19,7 +19,7 @@ struct AddEditTaskView: View {
 
   // Modals & Alerts
   var showModal: Binding<Bool>? = nil
-  @State var showWarning: Bool = false
+//  @State var showWarning: Bool = false
 
   // Inputs
   @State private var title: String = ""
@@ -40,7 +40,8 @@ struct AddEditTaskView: View {
           }
       }
       Section(header: Text("Notes")) {
-        TextField("Notes", text: $note)
+        TextField("Notes", text: $note, axis: .vertical)
+          .lineLimit(5...)
           .focused($focusedField, equals: .note)
           .onChange(of: note) { _, newValue in
             if isEditMode {
@@ -67,17 +68,18 @@ struct AddEditTaskView: View {
     .navigationBarTitleDisplayMode(.inline)
     .navigationBarItems(
       leading: isEditMode ? nil : Button(action: closeModal) { Text("Cancel") },
-      trailing: isEditMode ? nil : Button(action: addTask) { Text("Add") }
+      trailing: isEditMode ? nil : Button(action: addTask) { Text("Add") }.disabled(title.isEmpty)
     )
-    .alert(
-      isPresented: $showWarning,
-      content: {
-        Alert(
-          title: Text("Invalid Task"),
-          dismissButton: .default(Text("Got it!"))
-        )
-      }
-    )
+    // Had an alert to validate a note, before I read the A/B part
+//    .alert(
+//      isPresented: $showWarning,
+//      content: {
+//        Alert(
+//          title: Text("Invalid Task"),
+//          dismissButton: .default(Text("Got it!"))
+//        )
+//      }
+//    )
   }
 
   private func populateInputs() {
@@ -89,10 +91,10 @@ struct AddEditTaskView: View {
   }
 
   private func addTask() {
-    if title.isEmpty {
-      showWarning = true
-      return
-    }
+//    if title.isEmpty {
+//      showWarning = true
+//      return
+//    }
     taskStore.addTask(Task(title: title, isCompleted: isCompleted, notes: note))
     closeModal()
   }
