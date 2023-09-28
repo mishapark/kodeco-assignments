@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct NewTaskButton: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var onTap: () -> Void
+
+  var body: some View {
+    HStack {
+      Button(action: { onTap() }, label: {
+        Image(systemName: "plus.circle.fill")
+          .foregroundColor(.accentColor)
+
+        Text("New Task")
+          .font(.headline)
+      })
+      .padding(.top)
+      Spacer()
     }
+    .background(.white)
+  }
 }
 
 #Preview {
-    NewTaskButton()
+  NewTaskButton {}
 }

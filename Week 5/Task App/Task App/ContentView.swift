@@ -8,17 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+  @State var isAddTaskSheetOpen = false
+  @State var selectedTask: Task?
+  @EnvironmentObject var taskStore: Store
+
+  var body: some View {
+    NavigationStack {
+      ZStack {
+        ScrollView(.vertical) {
+          ForEach(taskStore.tasks) { task in
+            NavigationLink(value: task) {
+              TaskRow(task: task)
+            }
+          }
         }
-        .padding()
+        VStack(alignment: .leading) {
+          Spacer()
+          NewTaskButton(onTap: {
+            isAddTaskSheetOpen = true
+          })
+        }
+      }
+      .padding(.horizontal)
+      .sheet(isPresented: $isAddTaskSheetOpen, content: {
+        NavigationStack {
+          AddEditTaskView(
+            isEditMode: false,
+            showModal: $isAddTaskSheetOpen)
+        }
+      })
+      .navigationTitle("My Tasks")
+      .navigationDestination(for: Task.self) { task in
+        AddEditTaskView(
+          isEditMode: true,
+          task: task
+        )
+      }
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
+    .environmentObject(Store())
 }
