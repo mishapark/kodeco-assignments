@@ -55,29 +55,29 @@ struct TaskListView: View {
   }
 
   var body: some View {
-    if matchingTasks.isEmpty {
-      VStack {
+    VStack {
+      if matchingTasks.isEmpty {
         Spacer()
         Text("No tasks")
         Spacer()
-      }
-    } else {
-      List(matchingTasks) { task in
-        // Hiding trailing arrow from NavigationLink
-        ZStack {
-          NavigationLink {
-            TaskDetailView(task: $taskStore.tasks
-              .first(where: { $0.id == task.id })!)
-          } label: {
-            EmptyView()
+      } else {
+        List(matchingTasks) { task in
+          // Hiding trailing arrow from NavigationLink
+          ZStack {
+            NavigationLink {
+              TaskDetailView(task: $taskStore.tasks
+                .first(where: { $0.id == task.id })!)
+            } label: {
+              EmptyView()
+            }
+            .opacity(0)
+            TaskRowView(taskStore: taskStore, task: task)
           }
-          .opacity(0)
-          TaskRowView(taskStore: taskStore, task: task)
         }
+        .listStyle(PlainListStyle())
       }
-      .listStyle(PlainListStyle())
-      .searchable(text: $taskSearch)
     }
+    .searchable(text: $taskSearch)
   }
 }
 
