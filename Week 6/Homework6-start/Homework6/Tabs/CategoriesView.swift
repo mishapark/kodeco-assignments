@@ -20,22 +20,7 @@ struct CategoriesView: View {
       VStack {
         LazyVGrid(columns: columns) {
           ForEach(Category.allCases, id: \.self) { category in
-            VStack {
-              let numberOfTasks = taskStore.tasks.filter { $0.category == category
-              }.count
-
-              Text(category.rawValue)
-              Spacer()
-              Text("\(numberOfTasks)")
-            }
-            .padding(.vertical, 40)
-            .frame(maxWidth: .infinity, minHeight: 150)
-            .background(.red)
-            .foregroundColor(.white)
-            .font(.title2)
-            .fontWeight(.bold)
-            .clipShape(RoundedRectangle(cornerRadius: 7.0))
-            .onTapGesture {
+            Button {
               withAnimation {
                 if self.category == category {
                   self.category = nil
@@ -43,6 +28,22 @@ struct CategoriesView: View {
                   self.category = category
                 }
               }
+            } label: {
+              VStack {
+                let numberOfTasks = taskStore.tasks.filter { $0.category == category
+                }.count
+
+                Text(category.rawValue)
+                Spacer()
+                Text("\(numberOfTasks)")
+              }
+              .padding(.vertical, 40)
+              .frame(maxWidth: .infinity, minHeight: 150)
+              .background(.red)
+              .foregroundColor(.white)
+              .font(.title2)
+              .fontWeight(.bold)
+              .clipShape(RoundedRectangle(cornerRadius: 7.0))
             }
           }
         }
