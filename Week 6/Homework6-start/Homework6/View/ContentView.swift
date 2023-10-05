@@ -4,26 +4,35 @@
 
 import SwiftUI
 
+enum ContentViewTab {
+  case completed, incompleted, all
+}
+
 struct ContentView: View {
   @StateObject var taskStore = TaskStore()
-  
+
+  @State var selectedTab: ContentViewTab = .all
+
   var body: some View {
-    NavigationStack {
-      VStack {
-        if taskStore.tasks.isEmpty {
-          Text("No tasks found")
-        } else {
-          TaskListView(taskStore: taskStore)
+    TabView(selection: $selectedTab) {
+      CategoriesView(taskStore: taskStore)
+        .tag(ContentViewTab.all)
+        .tabItem {
+          Label("Categories", systemImage: "circle.grid.3x3.circle")
+            .environment(\.symbolVariants, .none)
         }
-        Spacer()
-        //NewTaskButton(addingTask: $addingTask)
-      }
-      .navigationTitle("My Tasks")
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NewTaskButtonView(taskStore: taskStore)
+      IncompletedTasksView(taskStore: taskStore, title: "My Tasks")
+        .tag(ContentViewTab.incompleted)
+        .tabItem {
+          Label("Tasks", systemImage: "list.bullet.circle")
+            .environment(\.symbolVariants, .none)
         }
-      }
+      CompletedTasksView(taskStore: taskStore, title: "Completed Tasks")
+        .tag(ContentViewTab.completed)
+        .tabItem {
+          Label("Completed", systemImage: "checkmark.circle")
+            .environment(\.symbolVariants, .none)
+        }
     }
   }
   

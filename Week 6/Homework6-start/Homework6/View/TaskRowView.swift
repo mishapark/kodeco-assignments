@@ -5,6 +5,7 @@
 import SwiftUI
 
 struct TaskRowView: View {
+  @ObservedObject var taskStore: TaskStore
   let task: Task
   var body: some View {
     HStack {
@@ -12,6 +13,11 @@ struct TaskRowView: View {
       Spacer()
       Image(systemName: task.isCompleted ? "checkmark.square" : "square")
         .foregroundColor(task.isCompleted ? Color.green : Color.red)
+        .onTapGesture {
+          withAnimation(.linear(duration: 0.2)) {
+            taskStore.toggleTaskCompletion(task: task)
+          }
+        }
     }
     .font(.title3)
     .bold()
@@ -22,6 +28,6 @@ struct TaskRowView: View {
 
 struct TaskRow_Previews: PreviewProvider {
   static var previews: some View {
-    TaskRowView(task: Task(title: "My Task", category: .noCategory, isCompleted: false))
+    TaskRowView(taskStore: TaskStore(), task: Task(title: "My Task", category: .noCategory, isCompleted: false))
   }
 }
