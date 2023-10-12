@@ -18,6 +18,9 @@
 		BA1340FF2A9193BB001A1F9F /* NewTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1340FE2A9193BB001A1F9F /* NewTaskButton.swift */; };
 		BA1341012A919522001A1F9F /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1341002A919522001A1F9F /* TaskListView.swift */; };
 		BA6EC8FC2AC4753D008BBB16 /* NewTaskButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6EC8FB2AC4753D008BBB16 /* NewTaskButtonView.swift */; };
+		C5ED20AE2ACE746500C69277 /* CompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED20AD2ACE746500C69277 /* CompletedTasksView.swift */; };
+		C5ED20B02ACEAC2F00C69277 /* IncompletedTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED20AF2ACEAC2F00C69277 /* IncompletedTasksView.swift */; };
+		C5ED20B22ACEAC8E00C69277 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED20B12ACEAC8E00C69277 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		BA1340FE2A9193BB001A1F9F /* NewTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskButton.swift; sourceTree = "<group>"; };
 		BA1341002A919522001A1F9F /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		BA6EC8FB2AC4753D008BBB16 /* NewTaskButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskButtonView.swift; sourceTree = "<group>"; };
+		C5ED20AD2ACE746500C69277 /* CompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksView.swift; sourceTree = "<group>"; };
+		C5ED20AF2ACEAC2F00C69277 /* IncompletedTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompletedTasksView.swift; sourceTree = "<group>"; };
+		C5ED20B12ACEAC8E00C69277 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,8 @@
 		BA1340E52A915A2A001A1F9F /* Homework6 */ = {
 			isa = PBXGroup;
 			children = (
+				C5ED20B32ACF3A2100C69277 /* Components */,
+				C5ED20B42ACF3B4600C69277 /* Tabs */,
 				BA1341032A9195DD001A1F9F /* View */,
 				BA1341022A9195D3001A1F9F /* Model */,
 				BA1340E62A915A2A001A1F9F /* Homework5App.swift */,
@@ -94,14 +102,31 @@
 			isa = PBXGroup;
 			children = (
 				BA1340F62A916399001A1F9F /* AddTaskView.swift */,
-				BA1340F82A916627001A1F9F /* TaskRowView.swift */,
 				BA1340E82A915A2A001A1F9F /* ContentView.swift */,
-				BA1341002A919522001A1F9F /* TaskListView.swift */,
-				BA1340FE2A9193BB001A1F9F /* NewTaskButton.swift */,
 				BA1340FC2A918B27001A1F9F /* TaskDetailView.swift */,
-				BA6EC8FB2AC4753D008BBB16 /* NewTaskButtonView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C5ED20B32ACF3A2100C69277 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BA1340F82A916627001A1F9F /* TaskRowView.swift */,
+				BA1340FE2A9193BB001A1F9F /* NewTaskButton.swift */,
+				BA1341002A919522001A1F9F /* TaskListView.swift */,
+				BA6EC8FB2AC4753D008BBB16 /* NewTaskButtonView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C5ED20B42ACF3B4600C69277 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				C5ED20AD2ACE746500C69277 /* CompletedTasksView.swift */,
+				C5ED20AF2ACEAC2F00C69277 /* IncompletedTasksView.swift */,
+				C5ED20B12ACEAC8E00C69277 /* CategoriesView.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,10 +204,13 @@
 				BA1340F72A916399001A1F9F /* AddTaskView.swift in Sources */,
 				BA1340FF2A9193BB001A1F9F /* NewTaskButton.swift in Sources */,
 				BA1340E92A915A2A001A1F9F /* ContentView.swift in Sources */,
+				C5ED20B02ACEAC2F00C69277 /* IncompletedTasksView.swift in Sources */,
 				BA1340E72A915A2A001A1F9F /* Homework5App.swift in Sources */,
 				BA1340F52A9161C3001A1F9F /* TaskStore.swift in Sources */,
+				C5ED20B22ACEAC8E00C69277 /* CategoriesView.swift in Sources */,
 				BA1341012A919522001A1F9F /* TaskListView.swift in Sources */,
 				BA6EC8FC2AC4753D008BBB16 /* NewTaskButtonView.swift in Sources */,
+				C5ED20AE2ACE746500C69277 /* CompletedTasksView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
