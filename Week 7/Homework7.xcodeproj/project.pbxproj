@@ -13,6 +13,11 @@
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
 		BAF39C2E2AB792B400B18802 /* apilist.json in Resources */ = {isa = PBXBuildFile; fileRef = BAF39C2D2AB792B400B18802 /* apilist.json */; };
+		C5374CDB2AD8C0280089855A /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5374CDA2AD8C0280089855A /* APIModel.swift */; };
+		C5374CDF2AD8CB020089855A /* APIStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5374CDE2AD8CB020089855A /* APIStore.swift */; };
+		C5374CE12ADB034C0089855A /* week7aboveandbeyond.json in Resources */ = {isa = PBXBuildFile; fileRef = C5374CE02ADB034C0089855A /* week7aboveandbeyond.json */; };
+		C5374CE32ADB037D0089855A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5374CE22ADB037D0089855A /* UserModel.swift */; };
+		C5374CE52ADB03F60089855A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5374CE42ADB03F60089855A /* UserStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAF39C2D2AB792B400B18802 /* apilist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apilist.json; sourceTree = "<group>"; };
+		C5374CDA2AD8C0280089855A /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		C5374CDE2AD8CB020089855A /* APIStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStore.swift; sourceTree = "<group>"; };
+		C5374CE02ADB034C0089855A /* week7aboveandbeyond.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = week7aboveandbeyond.json; sourceTree = "<group>"; };
+		C5374CE22ADB037D0089855A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		C5374CE42ADB03F60089855A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +70,16 @@
 			children = (
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
+				C5374CDE2AD8CB020089855A /* APIStore.swift */,
+				C5374CDA2AD8C0280089855A /* APIModel.swift */,
+				C5374CE22ADB037D0089855A /* UserModel.swift */,
+				C5374CE42ADB03F60089855A /* UserStore.swift */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
 				18D775CE22AD944400AE281E /* Info.plist */,
 				18D775C822AD944400AE281E /* Preview Content */,
 				BAF39C2D2AB792B400B18802 /* apilist.json */,
+				C5374CE02ADB034C0089855A /* week7aboveandbeyond.json */,
 			);
 			path = Homework7;
 			sourceTree = "<group>";
@@ -137,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
+				C5374CE12ADB034C0089855A /* week7aboveandbeyond.json in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				BAF39C2E2AB792B400B18802 /* apilist.json in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
@@ -172,7 +188,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5374CE52ADB03F60089855A /* UserStore.swift in Sources */,
+				C5374CDF2AD8CB020089855A /* APIStore.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				C5374CDB2AD8C0280089855A /* APIModel.swift in Sources */,
+				C5374CE32ADB037D0089855A /* UserModel.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
