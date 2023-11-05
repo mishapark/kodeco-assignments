@@ -12,7 +12,7 @@ struct ContentView: View {
   @StateObject private var store = SearchStore()
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         TextField("Search for images", text: $query, onCommit: {
           Task {
@@ -44,32 +44,44 @@ struct ContentView: View {
 struct DetailView: View {
   let photo: PhotoModel
   @ObservedObject var store: SearchStore
+  @MainActor @State private var isDownloading = false
+  @MainActor @State private var finishedDownloading = false
+  @MainActor @State private var downloadProgress: Float = 0.0
 
   var body: some View {
     VStack {
       Text(photo.alt)
-      if let downloadLocation = store.downloadLocation {
-        AsyncImage(url: downloadLocation) { phase in
-          switch phase {
-          case .empty:
-            ProgressView()
-          case .success(let image):
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-          case .failure:
-            Text("Failed to load image")
-          @unknown default:
-            ProgressView()
-          }
+
+      if finishedDownloading {
+        AsyncImage(url: store.downloadLocation) { image in
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        } placeholder: {
+          ProgressView()
         }
-      } else {
-        ProgressView()
+      }
+
+      if isDownloading {
+        ProgressView(value: downloadProgress)
       }
     }
     .navigationBarTitle("Image Detail")
     .onAppear {
-      store.downloadArtwork(at: URL(string: photo.src.large)!)
+      startDownload()
+    }
+  }
+
+  private func startDownload() {
+    Task {
+      do {
+        isDownloading = true
+        try await store.downloadImageBytes(at: URL(string: photo.src.large)!, progress: $downloadProgress)
+        isDownloading = false
+        finishedDownloading = true
+      } catch {
+        print(error)
+      }
     }
   }
 }
@@ -77,3 +89,4 @@ struct DetailView: View {
 #Preview {
   ContentView()
 }
+
