@@ -33,14 +33,14 @@
 import Foundation
 
 class UserStore: ObservableObject {
-  @Published var usersData: ResultData?
+  @Published var usersData = [User]()
   @Published var fileNotFound = false
 
   func readJSONFromBundle() {
     if let url = Bundle.main.url(forResource: "week7aboveandbeyond", withExtension: "json") {
       do {
         let data = try Data(contentsOf: url)
-        let usersData = try JSONDecoder().decode(ResultData.self, from: data)
+        let usersData = try JSONDecoder().decode(ResultData.self, from: data).results
         self.usersData = usersData
       } catch {
         print(error)
@@ -57,7 +57,7 @@ class UserStore: ObservableObject {
       do {
         let decoder = JSONDecoder()
         let jsonData = try Data(contentsOf: fileURL)
-        let usersData = try decoder.decode(ResultData.self, from: jsonData)
+        let usersData = try decoder.decode(ResultData.self, from: jsonData).results
 
         self.usersData = usersData
       } catch {

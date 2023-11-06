@@ -43,72 +43,8 @@ struct ContentView: View {
 
   var body: some View {
     TabView(selection: $selectedTab) {
-      NavigationStack {
-        List(apiVM.apiList?.entries ?? []) { api in
-          NavigationLink {
-            VStack {
-              Text(api.category)
-              Link(api.name, destination: URL(string: api.link)!)
-              Text(api.description)
-              Text("Auth: \(api.auth.isEmpty ? "N/A" : api.auth)")
-              Text("Cors: \(api.cors)")
-              Text("HTTPS: \(api.HTTPS ? "yes" : "no")")
-            }
-          } label: {
-            Text(api.name)
-          }
-        }
-        .navigationTitle("API List")
-        .alert(isPresented: $apiVM.fileNotFound) {
-          Alert(
-            title: Text("File not found"),
-            message: Text("JSON file not found"),
-            dismissButton: .default(Text("OK"))
-          )
-        }
-      }
-      .tag(ContentViewTab.api)
-      .tabItem {
-        Label("API", systemImage: "menubar.arrow.down.rectangle")
-          .environment(\.symbolVariants, .none)
-      }
-      .onAppear {
-        apiVM.readJSONFromBundle()
-//        apiVM.saveJSONToDocuments()
-      }
-      NavigationStack {
-        List(userVM.usersData?.results ?? []) { user in
-          NavigationLink {
-            VStack {
-              Text("\(user.name.first) \(user.name.last)")
-              Text("\(user.location.country) - \(user.location.city)")
-              Text(user.email)
-              Text("Age: \(user.dob.age)")
-              Text(user.phone)
-              AsyncImage(url: URL(string: user.picture.large))
-            }
-          } label: {
-            Text("\(user.name.first) \(user.name.last)")
-          }
-        }
-        .navigationTitle("User List")
-        .alert(isPresented: $userVM.fileNotFound) {
-          Alert(
-            title: Text("File not found"),
-            message: Text("JSON file not found"),
-            dismissButton: .default(Text("OK"))
-          )
-        }
-      }
-      .tag(ContentViewTab.user)
-      .tabItem {
-        Label("User", systemImage: "person")
-          .environment(\.symbolVariants, .none)
-      }
-      .onAppear {
-        userVM.readJSONFromBundle()
-//        userVM.saveJSONToDocuments()
-      }
+      APITab(apiVM: apiVM)
+      userTab(userVM: userVM)
     }
   }
 }
@@ -116,5 +52,85 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+  }
+}
+
+struct APITab: View {
+  @ObservedObject var apiVM: APIStore
+
+  var body: some View {
+    NavigationStack {
+      List(apiVM.apiList) { api in
+        NavigationLink {
+          VStack {
+            Text(api.category)
+            Link(api.name, destination: URL(string: api.link)!)
+            Text(api.description)
+            Text("Auth: \(api.auth.isEmpty ? "N/A" : api.auth)")
+            Text("Cors: \(api.cors)")
+            Text("HTTPS: \(api.HTTPS ? "yes" : "no")")
+          }
+        } label: {
+          Text(api.name)
+        }
+      }
+      .navigationTitle("API List")
+      .alert(isPresented: $apiVM.fileNotFound) {
+        Alert(
+          title: Text("File not found"),
+          message: Text("JSON file not found"),
+          dismissButton: .default(Text("OK"))
+        )
+      }
+    }
+    .tag(ContentViewTab.api)
+    .tabItem {
+      Label("API", systemImage: "menubar.arrow.down.rectangle")
+        .environment(\.symbolVariants, .none)
+    }
+    .onAppear {
+      apiVM.readJSONFromBundle()
+      //        apiVM.saveJSONToDocuments()
+    }
+  }
+}
+
+struct userTab: View {
+  @ObservedObject var userVM: UserStore
+
+  var body: some View {
+    NavigationStack {
+      List(userVM.usersData) { user in
+        NavigationLink {
+          VStack {
+            Text("\(user.name.first) \(user.name.last)")
+            Text("\(user.location.country) - \(user.location.city)")
+            Text(user.email)
+            Text("Age: \(user.dob.age)")
+            Text(user.phone)
+            AsyncImage(url: URL(string: user.picture.large))
+          }
+        } label: {
+          Text("\(user.name.first) \(user.name.last)")
+        }
+      }
+      .navigationTitle("User List")
+      .alert(isPresented: $userVM.fileNotFound) {
+        Alert(
+          title: Text("File not found"),
+          message: Text("JSON file not found"),
+          dismissButton: .default(Text("OK"))
+        )
+      }
+    }
+    .tag(ContentViewTab.user)
+    .tabItem {
+      Label("User", systemImage: "person")
+        .environment(\.symbolVariants, .none)
+    }
+    .onAppear {
+      userVM.readJSONFromBundle()
+      //        userVM.saveJSONToDocuments()
+    }
   }
 }

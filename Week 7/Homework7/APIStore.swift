@@ -33,14 +33,14 @@
 import Foundation
 
 class APIStore: ObservableObject {
-  @Published var apiList: APIList?
+  @Published var apiList = [APIModel]()
   @Published var fileNotFound = false
 
   func readJSONFromBundle() {
     if let url = Bundle.main.url(forResource: "apilist", withExtension: "json") {
       do {
         let data = try Data(contentsOf: url)
-        let apiList = try JSONDecoder().decode(APIList.self, from: data)
+        let apiList = try JSONDecoder().decode(APIList.self, from: data).entries
         self.apiList = apiList
       } catch {
         print(error)
@@ -51,20 +51,19 @@ class APIStore: ObservableObject {
   }
 
   func readJSONFromDocuments() {
-    if let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-      let fileURL = documentDirectoryURL.appendingPathComponent("savedAPIlist.json")
-
-      do {
-        let decoder = JSONDecoder()
-        let jsonData = try Data(contentsOf: fileURL)
-        let apiList = try decoder.decode(APIList.self, from: jsonData)
-
-        self.apiList = apiList
-      } catch {
-        print(error)
-      }
-    } else {
+    guard let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
       fileNotFound = true
+      return
+    }
+    let fileURL = documentDirectoryURL.appendingPathComponent("savedAPIlist.json")
+    do {
+      let decoder = JSONDecoder()
+      let jsonData = try Data(contentsOf: fileURL)
+      let apiList = try decoder.decode(APIList.self, from: jsonData).entries
+
+      self.apiList = apiList
+    } catch {
+      print(error)
     }
   }
 
